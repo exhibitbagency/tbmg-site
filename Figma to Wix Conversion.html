@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TBMG — The Breed Management Group</title>
+<meta name="description" content="The Breed Management Group — a global entertainment company empowering people through culture, education, and entrepreneurship." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E0E0E;
+    --white:#ffffff;
+    --g50:#f9fafb; --g100:#f3f4f6; --g200:#e5e7eb; --g300:#d1d5db;
+    --g400:#9ca3af; --g500:#6b7280; --g600:#4b5563; --g700:#374151;
+    --g800:#1f2937; --g900:#111827;
+    --display:'Bebas Neue', Impact, 'Arial Narrow Bold', sans-serif;
+    --body:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:var(--body);color:var(--ink);background:var(--white);line-height:1.5;-webkit-font-smoothing:antialiased;}
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  .display{font-family:var(--display);font-weight:400;letter-spacing:.01em;}
+  .wrap{max-width:80rem;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem;}
+  .eyebrow{font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;}
+  .upper{text-transform:uppercase;letter-spacing:.05em;}
+
+  /* ===== Header ===== */
+  .site-header{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--ink);color:#fff;}
+  .header-inner{display:flex;align-items:center;justify-content:space-between;padding:1.5rem;max-width:80rem;margin:0 auto;}
+  .logo{font-family:var(--display);font-size:1.875rem;letter-spacing:.08em;}
+  .nav{display:flex;gap:2rem;align-items:center;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;}
+  .nav a, .nav button{color:#fff;background:none;border:none;cursor:pointer;font:inherit;text-transform:uppercase;letter-spacing:.05em;transition:opacity .2s;}
+  .nav a:hover, .nav button:hover{opacity:.7;}
+  .dropdown{position:relative;}
+  .dropdown-toggle{display:inline-flex;align-items:center;gap:.35rem;}
+  .dropdown-toggle .chev{width:.7rem;height:.7rem;display:inline-block;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-3px;}
+  .dropdown-menu{position:absolute;top:100%;left:0;margin-top:1rem;background:#fff;color:#000;min-width:210px;box-shadow:0 12px 30px rgba(0,0,0,.18);opacity:0;visibility:hidden;transform:translateY(6px);transition:all .2s ease;}
+  .dropdown:hover .dropdown-menu{opacity:1;visibility:visible;transform:translateY(0);}
+  .dropdown-menu a{display:block;color:#000;padding:.75rem 1.5rem;font-size:.875rem;}
+  .dropdown-menu a:hover{background:var(--g100);opacity:1;}
+  .menu-btn{display:none;background:none;border:none;color:#fff;cursor:pointer;}
+  .menu-btn span{display:block;width:22px;height:2px;background:#fff;margin:5px 0;}
+
+  /* ===== Hero ===== */
+  .hero-stage{height:80vh;min-height:560px;margin-top:72px;background:linear-gradient(135deg,#0E0E0E 0%,#1a1a1a 100%);color:#fff;display:flex;align-items:center;justify-content:center;padding:0 1.5rem;}
+  .hero-stage .inner{max-width:64rem;width:100%;}
+  .hero-title{font-family:var(--display);font-size:clamp(3.25rem,12vw,8rem);line-height:.9;margin:0 0 1.5rem;}
+  .hero-sub{font-size:clamp(1.1rem,2vw,1.5rem);color:var(--g400);max-width:48rem;margin:0 0 3rem;}
+  .btn-light{display:inline-block;background:#fff;color:var(--ink);padding:1rem 2rem;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600;border:none;cursor:pointer;transition:background .2s;}
+  .btn-light:hover{background:var(--g200);}
+
+  /* ===== Music / credibility ===== */
+  .sec{padding:6rem 1.5rem;}
+  .sec.white{background:#fff;}
+  .sec.g50{background:var(--g50);}
+  .sec.g100{background:var(--g100);}
+  .sec.dark{background:var(--ink);color:#fff;}
+  .lead{font-size:1.25rem;color:var(--g600);max-width:48rem;margin:0 0 1.5rem;}
+  .link-arrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600;transition:opacity .2s;}
+  .link-arrow:hover{opacity:.7;}
+  .arrow{display:inline-block;width:.95rem;height:.95rem;position:relative;}
+  .arrow::after{content:"";position:absolute;top:50%;left:0;width:100%;height:0;border-top:2px solid currentColor;}
+  .arrow::before{content:"";position:absolute;top:50%;right:0;width:.5rem;height:.5rem;border-top:2px solid currentColor;border-right:2px solid currentColor;transform:translateY(-50%) rotate(45deg);}
+
+  .artist-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:6rem;}
+  .artist-card{aspect-ratio:3/4;background:var(--g200);display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+  .artist-card .name{font-family:var(--display);font-size:1.875rem;line-height:1.05;text-align:center;}
+
+  .accolades{display:grid;grid-template-columns:repeat(4,1fr);gap:3rem;margin-bottom:6rem;}
+  .accolade{border-left:4px solid var(--ink);padding-left:1.5rem;}
+  .accolade .t{font-family:var(--display);font-size:1.875rem;line-height:1.1;}
+
+  /* Featured video + filmstrip (from source globals.css) */
+  .breeds-container{width:100%;background:#000;color:#fff;overflow:hidden;}
+  .feat-hero{position:relative;width:100%;aspect-ratio:2.75/1;min-height:420px;overflow:hidden;background:#000;}
+  .feat-hero .feat-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;}
+  .feat-hero .overlay{position:absolute;inset:0;background:rgba(0,0,0,.2);}
+  .feat-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;z-index:2;}
+  .feat-content h3{font-size:.85rem;letter-spacing:.35em;text-transform:uppercase;font-weight:500;margin:0;}
+  .feat-content p{font-size:.7rem;opacity:.6;margin-top:.5rem;}
+  .filmstrip-wrapper{width:100%;overflow:hidden;padding:4px 0;background:#000;}
+  .filmstrip{display:flex;gap:3px;width:max-content;animation:scrollFilm 40s linear infinite;}
+  .filmstrip:hover{animation-play-state:paused;}
+  .thumb{width:140px;height:50px;flex-shrink:0;overflow:hidden;border:none;background:transparent;padding:0;cursor:pointer;opacity:.7;transition:opacity .3s;}
+  .thumb:hover{opacity:1;}
+  .thumb img{width:100%;height:100%;object-fit:cover;}
+  @keyframes scrollFilm{from{transform:translateX(0);}to{transform:translateX(-33.333%);}}
+
+  /* Press & Philanthropy */
+  .split2{display:grid;grid-template-columns:1fr 1fr;}
+  .panel{position:relative;height:60vh;min-height:340px;overflow:hidden;display:block;}
+  .panel .bg{position:absolute;inset:0;background:var(--g700);transition:transform .7s ease;}
+  .panel .grad{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.9));z-index:1;transition:background .5s;}
+  .panel:hover .bg{transform:scale(1.1);}
+  .panel:hover .grad{background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.7));}
+  .panel .label{position:absolute;left:0;right:0;bottom:0;padding:3rem;z-index:2;color:#fff;transition:transform .3s;}
+  .panel:hover .label{transform:translateY(-8px);}
+  .panel .label .sub{font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;opacity:.8;margin-bottom:.5rem;}
+  .panel .label .big{font-family:var(--display);font-size:clamp(2.25rem,4vw,3rem);}
+
+  /* Our Brands grid */
+  .h-jumbo{font-family:var(--display);font-size:clamp(3rem,7vw,4.5rem);margin:0 0 1rem;}
+  .brand-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);border-left:1px solid var(--ink);}
+  .brand-cell{border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:3rem;transition:all .3s;cursor:pointer;}
+  .brand-cell:hover{background:var(--ink);color:#fff;}
+  .brand-cell .bn{font-family:var(--display);font-size:1.875rem;margin-bottom:1rem;}
+  .brand-cell .bd{font-size:.875rem;line-height:1.65;margin:0 0 2rem;color:var(--g600);}
+  .brand-cell:hover .bd{color:var(--g300);}
+  .brand-cell .bc{display:flex;align-items:center;gap:.5rem;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600;}
+  .brand-cell.cta{background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:center;}
+  .brand-cell.cta .bd{color:var(--g300);}
+  .btn-outline{border:1px solid #fff;background:none;color:#fff;padding:.75rem 1.5rem;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600;cursor:pointer;align-self:flex-start;transition:all .2s;}
+  .btn-outline:hover{background:#fff;color:var(--ink);}
+
+  /* Announcements */
+  .row-between{display:flex;justify-content:space-between;align-items:center;margin-bottom:3rem;flex-wrap:wrap;gap:1rem;}
+  .cards2{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+  .ann-card{background:#fff;padding:2rem;border:1px solid var(--g200);}
+  .ann-card .ph{aspect-ratio:16/9;background:var(--g200);margin-bottom:1.5rem;}
+  .ann-card h3{font-family:var(--display);font-size:1.875rem;margin:0 0 1rem;}
+  .ann-card p{color:var(--g600);margin:0 0 1rem;}
+
+  /* Partner */
+  .partner-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;}
+  .partner-grid .col{display:flex;flex-direction:column;justify-content:center;gap:1rem;}
+  .partner-link{border:1px solid #fff;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;transition:all .2s;}
+  .partner-link:hover{background:#fff;color:var(--ink);}
+  .partner-link .pt{font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-bottom:.25rem;}
+  .partner-link .pp{font-size:.875rem;color:var(--g400);margin:0;}
+  .partner-link:hover .pp{color:var(--g600);}
+
+  /* Newsletter */
+  .news{position:relative;overflow:hidden;background:var(--g100);}
+  .news .watermark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.05;pointer-events:none;}
+  .news .watermark span{font-family:var(--display);font-size:20vw;line-height:1;}
+  .news .inner{max-width:48rem;margin:0 auto;text-align:center;position:relative;z-index:2;}
+  .news h2{font-size:clamp(1.875rem,4vw,2.25rem);line-height:1.2;margin:1.5rem 0;}
+  .news .form{display:flex;gap:1rem;max-width:36rem;margin:0 auto 1.5rem;}
+  .news input{flex:1;padding:1rem 1.5rem;border:1px solid var(--g300);background:transparent;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;}
+  .news input::placeholder{color:var(--g400);}
+  .news .fine{font-size:.75rem;color:var(--g600);line-height:1.6;max-width:42rem;margin:0 auto;}
+  .btn-dark{background:var(--ink);color:#fff;border:none;padding:1rem 2rem;font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600;cursor:pointer;transition:background .2s;}
+  .btn-dark:hover{background:var(--g800);}
+
+  /* Footer */
+  .site-footer{background:var(--ink);color:#fff;padding:4rem 1.5rem;}
+  .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3rem;margin-bottom:4rem;}
+  .footer-grid .fh{font-size:.875rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600;margin-bottom:1rem;}
+  .footer-grid ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem;}
+  .footer-grid a{color:var(--g400);font-size:.875rem;}
+  .footer-grid a:hover{color:#fff;}
+  .footer-logo{font-family:var(--display);font-size:1.5rem;margin-bottom:1rem;}
+  .footer-grid .tag{font-size:.875rem;color:var(--g400);margin:0;}
+  .footer-bottom{border-top:1px solid var(--g800);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+  .footer-bottom .cp{font-size:.75rem;color:var(--g500);margin:0;}
+  .footer-bottom .legal{display:flex;gap:1.5rem;font-size:.75rem;}
+  .footer-bottom .legal a{color:var(--g500);}
+  .footer-bottom .legal a:hover{color:#fff;}
+
+  /* Responsive */
+  @media (max-width:1024px){
+    .artist-row{grid-template-columns:repeat(3,1fr);}
+    .accolades{grid-template-columns:repeat(2,1fr);}
+    .brand-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:768px){
+    .nav{display:none;}
+    .menu-btn{display:block;}
+    .feat-hero{min-height:300px;}
+    .thumb{width:100px;height:40px;}
+    .artist-row{grid-template-columns:repeat(2,1fr);}
+    .accolades{grid-template-columns:1fr;gap:2rem;}
+    .brand-grid{grid-template-columns:1fr;}
+    .split2{grid-template-columns:1fr;}
+    .cards2{grid-template-columns:1fr;}
+    .partner-grid{grid-template-columns:1fr;gap:2rem;}
+    .news .form{flex-direction:column;}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo">TBMG</a>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/music">Music</a>
+      <div class="dropdown">
+        <button class="dropdown-toggle">Our Brands <span class="chev"></span></button>
+        <div class="dropdown-menu">
+          <a href="/bws-festival">BWS Festival</a>
+          <a href="/playlist">Playlist</a>
+          <a href="/skiro-studios">Skiro Studios</a>
+          <a href="/the-breed-academy">The Breed Academy</a>
+          <a href="/ceo-by-bws">CEO by BWS</a>
+        </div>
+      </div>
+      <a href="/about">About</a>
+      <a href="/news">News</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <button class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<section class="hero-stage">
+  <div class="inner">
+    <h1 class="hero-title">THE BREED ENT.</h1>
+    <p class="hero-sub">Empowering people through culture, education, and entrepreneurship</p>
+    <button class="btn-light">Explore Our Brands</button>
+  </div>
+</section>
+
+<!-- ===== Music & Entertainment credibility ===== -->
+<section class="sec white" id="music">
+  <div class="wrap">
+    <div style="margin-bottom:4rem;">
+      <p class="lead">We are a global entertainment company penetrating the music industry through production, promotion, and philanthropy. The main source of creative energy for artists, musicians and all entertainers.</p>
+      <a href="/music" class="link-arrow">Learn More <span class="arrow"></span></a>
+    </div>
+
+    <!-- Artist collaborations -->
+    <div class="artist-row">
+      <div class="artist-card"><div class="name">CHRIS BROWN</div></div>
+      <div class="artist-card"><div class="name">RIHANNA</div></div>
+      <div class="artist-card"><div class="name">T GRIZZLY</div></div>
+      <div class="artist-card"><div class="name">FRENCH MONTANA</div></div>
+      <div class="artist-card"><div class="name">TAMAR BRAXTON</div></div>
+    </div>
+
+    <!-- Accolades -->
+    <div class="accolades">
+      <div class="accolade"><div class="t">GRAMMY AWARD WINNING PRODUCERS</div></div>
+      <div class="accolade"><div class="t">3X RIAA<br>GOLD CERTIFIED</div></div>
+      <div class="accolade"><div class="t">2X RIAA<br>GOLD CERTIFIED</div></div>
+      <div class="accolade"><div class="t">DOUBLE PLATINUM RIAA CERTIFIED</div></div>
+    </div>
+
+    <!-- Featured video + filmstrip -->
+    <section class="breeds-container">
+      <div class="feat-hero">
+        <img id="featImg" class="feat-img" src="https://img.youtube.com/vi/kAstKsr3Xes/maxresdefault.jpg" alt="AGNEZ MO - OVERDOSE" />
+        <div class="overlay"></div>
+        <div class="feat-content">
+          <h3 id="featTitle">AGNEZ MO - OVERDOSE</h3>
+          <p id="featType">Music Video</p>
+        </div>
+      </div>
+      <div class="filmstrip-wrapper">
+        <div class="filmstrip">
+          <button class="thumb" data-img="https://img.youtube.com/vi/kAstKsr3Xes/maxresdefault.jpg" data-title="AGNEZ MO - OVERDOSE" data-type="Music Video"><img src="https://img.youtube.com/vi/kAstKsr3Xes/maxresdefault.jpg" alt="AGNEZ MO - OVERDOSE"></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/CYEu1byykTg/maxresdefault.jpg" data-title="ROTIMI - I DO" data-type="Music Video"><img src="https://img.youtube.com/vi/CYEu1byykTg/maxresdefault.jpg" alt="ROTIMI - I DO"></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/QP6tdboJq70/maxresdefault.jpg" data-title="DAVE EAST - PERFECT" data-type="Music Video"><img src="https://img.youtube.com/vi/QP6tdboJq70/maxresdefault.jpg" alt="DAVE EAST - PERFECT"></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/zpH0Rxcl4JY/maxresdefault.jpg" data-title="EARTHGANG - ALL EYES ON ME" data-type="Music Video"><img src="https://img.youtube.com/vi/zpH0Rxcl4JY/maxresdefault.jpg" alt="EARTHGANG - ALL EYES ON ME"></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/rm0GYoZOFwo/maxresdefault.jpg" data-title="CHRIS BROWN - IT'S GIVING CHRISTMAS" data-type="Music Video"><img src="https://img.youtube.com/vi/rm0GYoZOFwo/maxresdefault.jpg" alt="CHRIS BROWN - IT'S GIVING CHRISTMAS"></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/sILSv7GCyQg/maxresdefault.jpg" data-title="DUCKWRTH FT. KYLE DION - WORLD ON WHEELS" data-type="Music Video"><img src="https://img.youtube.com/vi/sILSv7GCyQg/maxresdefault.jpg" alt="DUCKWRTH FT. KYLE DION - WORLD ON WHEELS"></button>
+          <!-- duplicate set for seamless scroll -->
+          <button class="thumb" data-img="https://img.youtube.com/vi/kAstKsr3Xes/maxresdefault.jpg" data-title="AGNEZ MO - OVERDOSE" data-type="Music Video"><img src="https://img.youtube.com/vi/kAstKsr3Xes/maxresdefault.jpg" alt=""></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/CYEu1byykTg/maxresdefault.jpg" data-title="ROTIMI - I DO" data-type="Music Video"><img src="https://img.youtube.com/vi/CYEu1byykTg/maxresdefault.jpg" alt=""></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/QP6tdboJq70/maxresdefault.jpg" data-title="DAVE EAST - PERFECT" data-type="Music Video"><img src="https://img.youtube.com/vi/QP6tdboJq70/maxresdefault.jpg" alt=""></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/zpH0Rxcl4JY/maxresdefault.jpg" data-title="EARTHGANG - ALL EYES ON ME" data-type="Music Video"><img src="https://img.youtube.com/vi/zpH0Rxcl4JY/maxresdefault.jpg" alt=""></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/rm0GYoZOFwo/maxresdefault.jpg" data-title="CHRIS BROWN - IT'S GIVING CHRISTMAS" data-type="Music Video"><img src="https://img.youtube.com/vi/rm0GYoZOFwo/maxresdefault.jpg" alt=""></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/sILSv7GCyQg/maxresdefault.jpg" data-title="DUCKWRTH FT. KYLE DION - WORLD ON WHEELS" data-type="Music Video"><img src="https://img.youtube.com/vi/sILSv7GCyQg/maxresdefault.jpg" alt=""></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/kAstKsr3Xes/maxresdefault.jpg" data-title="AGNEZ MO - OVERDOSE" data-type="Music Video"><img src="https://img.youtube.com/vi/kAstKsr3Xes/maxresdefault.jpg" alt=""></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/CYEu1byykTg/maxresdefault.jpg" data-title="ROTIMI - I DO" data-type="Music Video"><img src="https://img.youtube.com/vi/CYEu1byykTg/maxresdefault.jpg" alt=""></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/QP6tdboJq70/maxresdefault.jpg" data-title="DAVE EAST - PERFECT" data-type="Music Video"><img src="https://img.youtube.com/vi/QP6tdboJq70/maxresdefault.jpg" alt=""></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/zpH0Rxcl4JY/maxresdefault.jpg" data-title="EARTHGANG - ALL EYES ON ME" data-type="Music Video"><img src="https://img.youtube.com/vi/zpH0Rxcl4JY/maxresdefault.jpg" alt=""></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/rm0GYoZOFwo/maxresdefault.jpg" data-title="CHRIS BROWN - IT'S GIVING CHRISTMAS" data-type="Music Video"><img src="https://img.youtube.com/vi/rm0GYoZOFwo/maxresdefault.jpg" alt=""></button>
+          <button class="thumb" data-img="https://img.youtube.com/vi/sILSv7GCyQg/maxresdefault.jpg" data-title="DUCKWRTH FT. KYLE DION - WORLD ON WHEELS" data-type="Music Video"><img src="https://img.youtube.com/vi/sILSv7GCyQg/maxresdefault.jpg" alt=""></button>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+
+<!-- ===== Press & Philanthropy ===== -->
+<section>
+  <div class="split2">
+    <a href="#" class="panel">
+      <div class="bg"></div>
+      <div class="grad"></div>
+      <div class="label"><div class="sub">Find Out More</div><div class="big">PRESS</div></div>
+    </a>
+    <a href="#" class="panel">
+      <div class="bg"></div>
+      <div class="grad"></div>
+      <div class="label"><div class="sub">Uplift &amp; Give Back</div><div class="big">PHILANTHROPY</div></div>
+    </a>
+  </div>
+</section>
+
+<!-- ===== Our Brands ===== -->
+<section class="sec" id="brands">
+  <div class="wrap">
+    <div style="margin-bottom:4rem;"><div class="h-jumbo">OUR BRANDS</div></div>
+    <div class="brand-grid">
+      <div class="brand-cell">
+        <div class="bn">BWS FESTIVAL</div>
+        <p class="bd">Annual celebration of Black excellence in music, culture, and community</p>
+        <div class="bc"><span>Get Tickets</span><span class="arrow"></span></div>
+      </div>
+      <div class="brand-cell">
+        <div class="bn">PLAYLIST</div>
+        <p class="bd">Curated events connecting Black professionals and creatives</p>
+        <div class="bc"><span>View Events</span><span class="arrow"></span></div>
+      </div>
+      <div class="brand-cell">
+        <div class="bn">SKIRO STUDIOS</div>
+        <p class="bd">Premium studio space, coworking, and creative production facilities</p>
+        <div class="bc"><span>Book Studio</span><span class="arrow"></span></div>
+      </div>
+      <div class="brand-cell">
+        <div class="bn">THE BREED ACADEMY</div>
+        <p class="bd">Educational programs developing the next generation of young leaders</p>
+        <div class="bc"><span>Apply Now</span><span class="arrow"></span></div>
+      </div>
+      <div class="brand-cell">
+        <div class="bn">CEO BY BWS</div>
+        <p class="bd">Strategic consulting and business development for entrepreneurs</p>
+        <div class="bc"><span>Book Consultation</span><span class="arrow"></span></div>
+      </div>
+      <div class="brand-cell cta">
+        <div class="bn">JOIN OUR COMMUNITY</div>
+        <p class="bd">Stay connected with updates, events, and opportunities across all TBMG brands</p>
+        <button class="btn-outline">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Announcements ===== -->
+<section class="sec g50">
+  <div class="wrap">
+    <div class="row-between">
+      <div class="h-jumbo" style="margin:0;">ANNOUNCEMENTS</div>
+      <a href="#" class="link-arrow">Read All <span class="arrow"></span></a>
+    </div>
+    <div class="cards2">
+      <div class="ann-card">
+        <div class="ph"></div>
+        <h3>Latest Update Title</h3>
+        <p>Brief description of the announcement or update from TBMG and its brands.</p>
+        <a href="#" class="link-arrow">Learn More <span class="arrow"></span></a>
+      </div>
+      <div class="ann-card">
+        <div class="ph"></div>
+        <h3>Another Announcement</h3>
+        <p>Brief description of the announcement or update from TBMG and its brands.</p>
+        <a href="#" class="link-arrow">Learn More <span class="arrow"></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Partner With Us ===== -->
+<section class="sec dark">
+  <div class="wrap">
+    <div class="partner-grid">
+      <div class="col"><div class="h-jumbo" style="margin:0;">PARTNER WITH US</div></div>
+      <div class="col">
+        <a href="#" class="partner-link">
+          <div><div class="pt">Sponsorships</div><p class="pp">Festival and event partnerships</p></div>
+          <span class="arrow"></span>
+        </a>
+        <a href="#" class="partner-link">
+          <div><div class="pt">Partnerships</div><p class="pp">Strategic collaborations</p></div>
+          <span class="arrow"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Newsletter ===== -->
+<section class="sec news">
+  <div class="watermark"><span>TBMG</span></div>
+  <div class="inner">
+    <div class="eyebrow">Join the Newsletter</div>
+    <h2>Join the mailing list to receive the latest news, events, updates and resources.</h2>
+    <div class="form">
+      <input type="email" placeholder="ENTER EMAIL ADDRESS" />
+      <button class="btn-dark">Submit</button>
+    </div>
+    <p class="fine">By signing up, you consent to TBMG collecting your email address and using it to send you marketing communications. Emails will be sent by or on behalf of TBMG. You may withdraw your consent at any time by clicking "unsubscribe" in any email or by contacting us at help@tbmg.com.</p>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="wrap" style="padding:0;">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">TBMG</div>
+        <p class="tag">The Breed Management Group</p>
+      </div>
+      <div>
+        <div class="fh">Brands</div>
+        <ul>
+          <li><a href="/bws-festival">BWS Festival</a></li>
+          <li><a href="/playlist">Playlist</a></li>
+          <li><a href="/skiro-studios">Skiro Studios</a></li>
+          <li><a href="/the-breed-academy">The Breed Academy</a></li>
+          <li><a href="/ceo-by-bws">CEO by BWS</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fh">Company</div>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/music">Music</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/news">News</a></li>
+          <li><a href="#">Philanthropy</a></li>
+          <li><a href="#">Press Kit</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fh">Connect</div>
+        <ul>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Twitter</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="cp">&copy; 2026 The Breed Management Group. All rights reserved.</p>
+      <div class="legal"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Progressive enhancement: clicking a filmstrip thumb swaps the featured hero.
+  (function(){
+    var img = document.getElementById('featImg');
+    var title = document.getElementById('featTitle');
+    var type = document.getElementById('featType');
+    document.querySelectorAll('.thumb').forEach(function(b){
+      b.addEventListener('click', function(){
+        if(img) img.src = b.getAttribute('data-img');
+        if(title) title.textContent = b.getAttribute('data-title');
+        if(type) type.textContent = b.getAttribute('data-type');
+      });
+    });
+  })();
+</script>
+</body>
+</html>
